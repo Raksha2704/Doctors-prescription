@@ -25,6 +25,9 @@ model = models.Sequential([
 
     layers.Conv2D(64, (3,3), activation='relu'),
     layers.MaxPooling2D(),
+    
+    layers.Conv2D(128, (3,3), activation='relu'),  # NEW
+    layers.MaxPooling2D(),
 
     layers.Flatten(),
     layers.Dense(128, activation='relu'),
@@ -39,7 +42,7 @@ model.compile(
 )
 
 # Train model
-model.fit(train_data, epochs=10)
+model.fit(train_data, epochs=20)
 
 # Save model
 model.save("models/medicine_model.h5")
