@@ -1,11 +1,19 @@
 import cv2
 
 def preprocess_image(image_path):
+
     img = cv2.imread(image_path)
 
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    blur = cv2.GaussianBlur(gray, (5,5), 0)
+    gray = cv2.cvtColor(
+        img,
+        cv2.COLOR_BGR2GRAY
+    )
 
-    _, thresh = cv2.threshold(blur, 150, 255, cv2.THRESH_BINARY)
+    gray = cv2.resize(
+        gray,
+        None,
+        fx=2,
+        fy=2
+    )
 
-    return thresh
+    return gray

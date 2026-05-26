@@ -1,7 +1,15 @@
-import pytesseract
+import easyocr
 
-# IMPORTANT: change path if needed
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# Create reader
+reader = easyocr.Reader(['en'])
 
 def extract_text(image):
-    return pytesseract.image_to_string(image)
+
+    result = reader.readtext(image)
+
+    extracted_text = ""
+
+    for item in result:
+        extracted_text += item[1] + " "
+
+    return extracted_text

@@ -16,8 +16,17 @@ train_data = tf.keras.preprocessing.image_dataset_from_directory(
 class_names = train_data.class_names
 print("Classes:", class_names)
 
-# Build CNN model
+# SIMPLE augmentation
+data_augmentation = tf.keras.Sequential([
+    layers.RandomRotation(0.05),
+    layers.RandomZoom(0.05),
+])
+
+# SIMPLE CNN
 model = models.Sequential([
+
+    data_augmentation,
+
     layers.Rescaling(1./255),
 
     layers.Conv2D(32, (3,3), activation='relu'),
@@ -25,26 +34,25 @@ model = models.Sequential([
 
     layers.Conv2D(64, (3,3), activation='relu'),
     layers.MaxPooling2D(),
-    
-    layers.Conv2D(128, (3,3), activation='relu'),  # NEW
-    layers.MaxPooling2D(),
 
     layers.Flatten(),
-    layers.Dense(128, activation='relu'),
+
+    layers.Dense(64, activation='relu'),
+
     layers.Dense(len(class_names), activation='softmax')
 ])
 
-# Compile model
+# Compile
 model.compile(
     optimizer='adam',
     loss='sparse_categorical_crossentropy',
     metrics=['accuracy']
 )
 
-# Train model
-model.fit(train_data, epochs=20)
+# Train
+model.fit(train_data, epochs=15)
 
-# Save model
+# Save
 model.save("models/medicine_model.h5")
 
-print("Model training completed and saved!")
+print("Training completed!")
