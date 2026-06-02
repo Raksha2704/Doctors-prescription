@@ -7,7 +7,8 @@ from rapidfuzz import process
 medicine_list = [
     "aceta",
     "alatrol",
-    "esonix"
+    "esonix",
+    "trilock"
 ]
 
 # Image path

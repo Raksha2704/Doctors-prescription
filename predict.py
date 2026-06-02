@@ -6,7 +6,7 @@ import cv2
 model = tf.keras.models.load_model("models/medicine_model.h5")
 
 # Class names (must match training order)
-class_names = ['aceta', 'alatrol', 'esonix']
+class_names = ['aceta', 'alatrol', 'esonix', 'trilock']  # add more as needed
 
 # Load test image
 img_path = "test.jpg"   # put your test image here
